@@ -1,0 +1,29 @@
+### V1 ###
+
+- Page d'input de l'API key perso (comme ça tout est fait en front et d'autres peuvent utiliser l'outil) 
+  - lien vers les site arena net pour récupérer une key
+    - https://account.arena.net/applications
+  - Liste des permissions nécessaires à la key
+  - Redirection vers cette page depuis n'importe quelle page si l'API Key est pas renseignée
+
+- Page de 404 classique
+  - https://api.guildwars2.com/v2/quaggans
+
+- Page d'accueil : infos générales du compte
+  - Age du compte & date de création, Nom du compte, monde, niveau fractal
+    - https://api.guildwars2.com/v2/account
+    - https://api.guildwars2.com/v2/worlds?id=1001
+  - Contenu du porte-feuille
+    - https://api.guildwars2.com/v2/account/wallet
+    - https://api.guildwars2.com/v2/currencies?ids=all&lang=fr
+  - Titres liés au compte
+    - https://api.guildwars2.com/v2/account/titles
+    - https://api.guildwars2.com/v2/titles?ids=40,90&lang=fr
+  - Maitrises et points de maitrise
+    - https://api.guildwars2.com/v2/account/masteries
+    - https://api.guildwars2.com/v2/masteries?ids=1,2&lang=fr
+    - https://api.guildwars2.com/v2/account/mastery/points
+
+### V2 ###
+- Outil de navigation et de suivi des succès
+  - À spécifier plus tard yolo on va pas se lancer dans un truc trop intimidant direct sinon on va pas le faire on se connait !

@@ -15,6 +15,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
     "bootstrap": "^4.6.1",
+    "bootstrap-icons": "^1.8.1",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.19.3",
     "nuxt": "^2.15.8",
@@ -27,6 +28,7 @@
     "@babel/eslint-parser": "^7.16.3",
     "@nuxtjs/eslint-config": "^8.0.0",
     "@nuxtjs/eslint-module": "^3.0.2",
+    "dotenv": "^16.0.0",
     "eslint": "^8.4.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-nuxt": "^3.1.0",

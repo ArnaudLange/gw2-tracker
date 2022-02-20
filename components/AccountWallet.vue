@@ -1,15 +1,24 @@
 <template>
-  <div>
-    <h1>Porte-monnaie</h1>
-    <ul>
-      <li v-for="currency in wallet" :key="currency.id">
-        <span v-b-tooltip.hover.right :title="currency.description"
-          ><img :src="currency.icon" height="20" /> {{ currency.name }} :
-          {{ currency.value }}</span
+  <b-card class="custom-card">
+    <div class="custom-carder-header">
+      <h1>Porte-monnaie</h1>
+    </div>
+    <div class="custom-card-content">
+      <p v-for="currency in wallet" :key="currency.id">
+        <span :id="`currency-${currency.id}`">
+          <img :src="currency.icon" height="20" /> {{ currency.name }} :
+          {{ currency.value }}
+        </span>
+        <b-tooltip
+          :title="currency.description"
+          :target="`currency-${currency.id}`"
+          boundary="document"
+          placement="right"
         >
-      </li>
-    </ul>
-  </div>
+        </b-tooltip>
+      </p>
+    </div>
+  </b-card>
 </template>
 
 <script>
@@ -43,5 +52,9 @@ export default {
 <style scoped>
 img {
   vertical-align: text-bottom;
+}
+
+p {
+  margin-bottom: 0.15em;
 }
 </style>

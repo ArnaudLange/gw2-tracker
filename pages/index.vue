@@ -38,6 +38,7 @@ import AccountWallet from '~/components/AccountWallet.vue'
 export default {
   name: 'IndexPage',
   components: { AccountHeader, AccountWallet, AccountTitles, AccountMasteries },
+  middleware: 'authenticated',
   data() {
     return {
       componentKey: 0,

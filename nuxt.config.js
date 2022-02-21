@@ -18,7 +18,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/axios.js'],
+  plugins: ['~/plugins/axios.js', { src: '~/plugins/persistedState.js' }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -49,10 +49,6 @@ export default {
       pathRewrite: { '^/gw2-api/': '' },
       changeOrigin: true,
     },
-  },
-
-  publicRuntimeConfig: {
-    gw2ApiToken: process.env.TOKEN,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

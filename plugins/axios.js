@@ -1,5 +1,6 @@
-export default function ({ $axios, $config: { gw2ApiToken } }) {
+export default function ({ $axios, store }) {
   $axios.onRequest((config) => {
-    config.headers.common.Authorization = `Bearer ${gw2ApiToken}`
+    if (store.getters.token)
+      config.headers.common.Authorization = `Bearer ${store.getters.token}`
   })
 }

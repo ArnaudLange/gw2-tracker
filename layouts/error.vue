@@ -6,7 +6,9 @@
     </div>
     <div v-else class="error">
       <img src="~/static/construction.png" />
-      <h1>Oh non, on dirait que quelque chose est cassé, on va s'occuper de ça</h1>
+      <h1>
+        Oh non, on dirait que quelque chose est cassé, on va s'occuper de ça
+      </h1>
     </div>
     <NuxtLink to="/">Retourner à l'accueil</NuxtLink>
   </div>
@@ -19,11 +21,11 @@ export default {
   props: {
     error: {
       type: Object,
-      default () {
+      default() {
         return {}
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>
 

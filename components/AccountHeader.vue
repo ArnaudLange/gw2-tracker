@@ -48,9 +48,7 @@ export default {
     }
   },
   async fetch() {
-    this.myAccount = await this.$axios.$get(
-      '/gw2-api/account'
-    )
+    this.myAccount = await this.$axios.$get('/gw2-api/account')
     this.myWorld = await this.$axios.$get(
       `/gw2-api/worlds?id=${this.myAccount.world}&lang=fr`
     )

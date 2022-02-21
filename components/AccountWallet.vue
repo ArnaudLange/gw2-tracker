@@ -35,9 +35,7 @@ export default {
     this.currencies = await this.$axios.$get(
       '/gw2-api/currencies?ids=all&lang=fr'
     )
-    this.myCurrencies = await this.$axios.$get(
-      '/gw2-api/account/wallet'
-    )
+    this.myCurrencies = await this.$axios.$get('/gw2-api/account/wallet')
 
     this.wallet = this.currencies.map((currency) => {
       const foundCur = this.myCurrencies.find((el) => el.id === currency.id)

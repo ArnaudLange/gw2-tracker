@@ -32,22 +32,16 @@ export default {
     }
   },
   async fetch() {
-    this.titles = await this.$axios.$get(
-      '/gw2-api/titles?ids=all&lang=fr'
-    )
+    this.titles = await this.$axios.$get('/gw2-api/titles?ids=all&lang=fr')
 
-    const myTitlesIds = await this.$axios.$get(
-      '/gw2-api/account/titles'
-    )
+    const myTitlesIds = await this.$axios.$get('/gw2-api/account/titles')
     this.myTitles = this.titles.filter((title) =>
       myTitlesIds.includes(title.id)
     )
 
     const achievementIds = this.myTitles.map((el) => el.achievement)
     this.achievementList = await this.$axios.$get(
-      `/gw2-api/achievements?ids=${achievementIds.join(
-        ','
-      )}&lang=fr`
+      `/gw2-api/achievements?ids=${achievementIds.join(',')}&lang=fr`
     )
 
     this.titlesToDisplay = this.myTitles.map((title) => {

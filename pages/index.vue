@@ -72,7 +72,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  }
+}
 
 .header-title .btn {
   font-size: 1.5em;

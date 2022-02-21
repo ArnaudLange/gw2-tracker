@@ -1,8 +1,7 @@
 import createPersistedState from 'vuex-persistedstate'
-import * as Cookies from 'js-cookie'
 import cookie from 'cookie'
 
-export default ({ store, req }) => {
+export default ({ app, store, req }) => {
   createPersistedState({
     paths: ['token'],
     storage: {
@@ -11,12 +10,12 @@ export default ({ store, req }) => {
           const parsedCookies = cookie.parse(req.headers.cookie ?? '')
           return parsedCookies[key]
         } else {
-          return Cookies.get(key)
+          return app.$cookies.get(key)
         }
       },
       setItem: (key, value) =>
-        Cookies.set(key, value, { expires: 365, secure: false }),
-      removeItem: (key) => Cookies.remove(key),
+        app.$cookies.set(key, value, { path: '/', maxAge: 60 * 60 * 24 * 7 }),
+      removeItem: (key) => app.$cookies.remove(key),
     },
   })(store)
 }

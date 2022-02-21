@@ -60,6 +60,6 @@ export default {
     download: true,
     families: {
       Roboto: true,
-    }
+    },
   },
 }

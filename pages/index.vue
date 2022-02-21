@@ -55,6 +55,10 @@ export default {
 <style>
 @import url('bootstrap-icons');
 
+.row {
+  width: 100%;
+}
+
 .home {
   font-family: 'Roboto';
 }

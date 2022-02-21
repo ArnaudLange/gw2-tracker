@@ -25,5 +25,7 @@
     - https://api.guildwars2.com/v2/account/mastery/points
 
 ### V2 ###
+- Page de suivi des persos
+  - https://api.guildwars2.com/v2/characters?ids=all
 - Outil de navigation et de suivi des succès
   - À spécifier plus tard yolo on va pas se lancer dans un truc trop intimidant direct sinon on va pas le faire on se connait !

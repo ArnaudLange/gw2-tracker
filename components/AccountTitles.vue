@@ -33,11 +33,11 @@ export default {
   },
   async fetch() {
     this.titles = await this.$axios.$get(
-      'https://api.guildwars2.com/v2/titles?ids=all&lang=fr'
+      '/gw2-api/titles?ids=all&lang=fr'
     )
 
     const myTitlesIds = await this.$axios.$get(
-      'https://api.guildwars2.com/v2/account/titles'
+      '/gw2-api/account/titles'
     )
     this.myTitles = this.titles.filter((title) =>
       myTitlesIds.includes(title.id)
@@ -45,13 +45,11 @@ export default {
 
     const achievementIds = this.myTitles.map((el) => el.achievement)
     this.achievementList = await this.$axios.$get(
-      `https://api.guildwars2.com/v2/achievements?ids=${achievementIds.join(
+      `/gw2-api/achievements?ids=${achievementIds.join(
         ','
       )}&lang=fr`
     )
-  },
-  fetchKey: 'account-titles',
-  mounted() {
+
     this.titlesToDisplay = this.myTitles.map((title) => {
       const foundAchievement = this.achievementList.find(
         (el) => el.id === title.achievement
@@ -64,6 +62,7 @@ export default {
       }
     })
   },
+  fetchKey: 'account-titles',
 }
 </script>
 

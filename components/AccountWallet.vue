@@ -33,19 +33,18 @@ export default {
   },
   async fetch() {
     this.currencies = await this.$axios.$get(
-      'https://api.guildwars2.com/v2/currencies?ids=all&lang=fr'
+      '/gw2-api/currencies?ids=all&lang=fr'
     )
     this.myCurrencies = await this.$axios.$get(
-      'https://api.guildwars2.com/v2/account/wallet'
+      '/gw2-api/account/wallet'
     )
-  },
-  fetchKey: 'account-wallet',
-  mounted() {
+
     this.wallet = this.currencies.map((currency) => {
       const foundCur = this.myCurrencies.find((el) => el.id === currency.id)
       return { ...currency, value: foundCur ? foundCur.value : 0 }
     })
   },
+  fetchKey: 'account-wallet',
 }
 </script>
 

@@ -18,7 +18,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~/plugins/axios.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -40,9 +40,19 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
-    proxyHeaders: false,
-    credentials: false,
+    proxy: true
+  },
+
+  proxy: {
+    "/gw2-api/": {
+      target: "https://api.guildwars2.com/v2/",
+      pathRewrite: { "^/gw2-api/": "" },
+      changeOrigin: true
+    }
+  },
+
+  publicRuntimeConfig: {
+    gw2ApiToken: process.env.TOKEN,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

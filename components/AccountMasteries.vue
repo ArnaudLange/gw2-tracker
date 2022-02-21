@@ -1,12 +1,12 @@
 <template>
   <b-card class="custom-card">
-    <div class="custom-carder-header">
+    <div class="custom-carder-header pb-1">
       <h1>Maîtrises</h1>
       <p>
         Rang : {{ masteryRank }}
         <img src="~/static/mp_rank.png" height="20" />
       </p>
-      <p>
+      <div>
         <span>Disponibles : </span>
         <span
           v-for="region in lightMasteryPoints"
@@ -36,10 +36,10 @@
             height="20"
           />
         </span>
-      </p>
+      </div>
     </div>
     <div class="custom-card-content">
-      <p v-for="mastery in masteriesToDisplay" :key="mastery.id">
+      <div v-for="mastery in masteriesToDisplay" :key="mastery.id">
         <span
           :id="`mastery-${mastery.id}`"
           v-b-toggle="`collapse-mastery-${mastery.id}`"
@@ -56,7 +56,6 @@
             <span class="bi bi-chevron-right" />
           </span>
         </span>
-
         <b-tooltip
           :title="mastery.requirement"
           :target="`mastery-${mastery.id}`"
@@ -66,7 +65,7 @@
         >
         </b-tooltip>
         <b-collapse :id="`collapse-mastery-${mastery.id}`">
-          <p
+          <div
             v-for="(level, index) in mastery.levels"
             :key="level.name"
             class="levels"
@@ -111,9 +110,9 @@
               placement="left"
             >
             </b-tooltip>
-          </p>
+          </div>
         </b-collapse>
-      </p>
+      </div>
     </div>
   </b-card>
 </template>
@@ -133,24 +132,16 @@ export default {
   },
   async fetch() {
     this.masteries = await this.$axios.$get(
-      'https://api.guildwars2.com/v2/masteries?ids=all&lang=fr'
+      '/gw2-api/masteries?ids=all&lang=fr'
     )
-    this.myMasteries = await this.$axios.$get(
-      'https://api.guildwars2.com/v2/account/masteries'
-    )
+    this.myMasteries = await this.$axios.$get('/gw2-api/account/masteries')
     this.myMasteryPoints = await this.$axios.$get(
-      'https://api.guildwars2.com/v2/account/mastery/points'
+      '/gw2-api/account/mastery/points'
     )
 
-    this.titles = await this.$axios.$get(
-      'https://api.guildwars2.com/v2/titles?ids=all&lang=fr'
-    )
-    this.myTitles = await this.$axios.$get(
-      'https://api.guildwars2.com/v2/account/titles'
-    )
-  },
-  fetchKey: 'account-masteries',
-  mounted() {
+    this.titles = await this.$axios.$get('/gw2-api/titles?ids=all&lang=fr')
+    this.myTitles = await this.$axios.$get('/gw2-api/account/titles')
+
     this.masteriesToDisplay = this.masteries.map((mastery) => {
       const foundMas = this.myMasteries.find((el) => el.id === mastery.id)
       return { ...mastery, level: foundMas ? foundMas.level : 0 }
@@ -164,6 +155,7 @@ export default {
       0
     )
   },
+  fetchKey: 'account-masteries',
 }
 </script>
 

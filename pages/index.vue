@@ -5,20 +5,26 @@
         <img src="~/static/gw2_white_logo.png" height="50" />
         Account Tracker
       </h1>
+      <b-button
+        pill
+        class="btn bi bi-arrow-clockwise"
+        variant="outline-light"
+        @click="forceRerender"
+      ></b-button>
     </div>
     <div class="header-content">
-      <account-header />
+      <account-header :key="`header-${componentKey}`" />
     </div>
     <div class="body">
       <b-row>
         <b-col>
-          <account-wallet />
+          <account-wallet :key="`wallet-${componentKey}`" />
         </b-col>
         <b-col>
-          <account-titles />
+          <account-titles :key="`titles-${componentKey}`" />
         </b-col>
         <b-col>
-          <account-masteries />
+          <account-masteries :key="`masteries-${componentKey}`" />
         </b-col>
       </b-row>
     </div>
@@ -32,14 +38,22 @@ import AccountWallet from '~/components/AccountWallet.vue'
 export default {
   name: 'IndexPage',
   components: { AccountHeader, AccountWallet, AccountTitles, AccountMasteries },
-  async asyncData({ $axios }) {
-    await $axios.setToken(process.env.TOKEN, 'Bearer')
+  data() {
+    return {
+      componentKey: 0,
+    }
+  },
+  methods: {
+    forceRerender(child) {
+      this.componentKey += 1
+    },
   },
 }
 </script>
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Oswald|Roboto:400,700');
+@import url('bootstrap-icons');
 
 .home {
   font-family: 'Roboto';
@@ -49,11 +63,21 @@ export default {
   padding-top: 0.5em;
   padding-left: 0.5em;
   padding-bottom: 0.1em;
+  padding-right: 0.5em;
   background-color: #bd0f0f;
   color: white;
   border-width: 2px;
   border-style: solid;
   border-color: rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  }
+
+.header-title .btn {
+  font-size: 1.5em;
+  align-self: center;
+  border: none;
 }
 
 .header-content {
@@ -64,6 +88,10 @@ export default {
 }
 
 .body {
+  background-color: #f7fafc;
+}
+
+body {
   background-color: #f7fafc;
 }
 

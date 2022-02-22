@@ -2,9 +2,18 @@
   <div>
     <div class="header-title">
       <h1>
-        <img src="~/static/gw2_white_logo.png" height="50" />
+        <nuxt-link to="/">
+          <img src="~/static/gw2_white_logo.png" height="50" />
+        </nuxt-link>
         {{ title }}
       </h1>
+      <b-button
+        v-if="connected"
+        v-b-toggle.sidebar-backdrop
+        pill
+        class="btn sidebar bi bi-list"
+        variant="outline-light"
+      ></b-button>
       <b-button
         v-if="connected"
         pill
@@ -128,7 +137,7 @@ export default {
   border: none;
 }
 
-.header-title .reload {
+.header-title .sidebar {
   margin-left: auto;
 }
 

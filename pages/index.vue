@@ -1,19 +1,7 @@
 <template>
   <div class="home">
-    <div class="header-title">
-      <h1>
-        <img src="~/static/gw2_white_logo.png" height="50" />
-        Account Tracker
-      </h1>
-      <b-button
-        pill
-        class="btn bi bi-arrow-clockwise"
-        variant="outline-light"
-        @click="forceRerender"
-      ></b-button>
-    </div>
-    <div class="header-content">
-      <account-header :key="`header-${componentKey}`" />
+    <div class="header">
+      <account-header :key="`header-${componentKey}`" title="Account Summary" @forceRerender="forceRerender"/>
     </div>
     <div class="body">
       <b-row>
@@ -61,34 +49,6 @@ export default {
 
 .home {
   font-family: 'Roboto';
-}
-
-.header-title {
-  padding-top: 0.5em;
-  padding-left: 0.5em;
-  padding-bottom: 0.1em;
-  padding-right: 0.5em;
-  background-color: #bd0f0f;
-  color: white;
-  border-width: 2px;
-  border-style: solid;
-  border-color: rgba(0, 0, 0, 0.04);
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.header-title .btn {
-  font-size: 1.5em;
-  align-self: center;
-  border: none;
-}
-
-.header-content {
-  padding-top: 0.5em;
-  padding-left: 0.5em;
-  background-color: #bd0f0f;
-  color: white;
 }
 
 .body {

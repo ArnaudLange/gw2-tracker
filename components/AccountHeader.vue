@@ -6,13 +6,21 @@
         {{ title }}
       </h1>
       <b-button
+        v-if="connected"
         pill
-        class="btn bi bi-arrow-clockwise"
+        class="btn reload bi bi-arrow-clockwise"
         variant="outline-light"
         @click="forceRerender"
       ></b-button>
+      <b-button
+        v-if="connected"
+        pill
+        class="btn bi bi-power"
+        variant="outline-light"
+        @click="disconnect"
+      ></b-button>
     </div>
-    <div class="header-content">
+    <div v-if="connected" class="header-content">
       <b-row>
         <b-col>
           <p>
@@ -58,8 +66,12 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'Default Title'
-    }
+      default: 'Default Title',
+    },
+    connected: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -68,10 +80,12 @@ export default {
     }
   },
   async fetch() {
-    this.myAccount = await this.$axios.$get('/gw2-api/account')
-    this.myWorld = await this.$axios.$get(
-      `/gw2-api/worlds?id=${this.myAccount.world}&lang=fr`
-    )
+    if (this.connected) {
+      this.myAccount = await this.$axios.$get('/gw2-api/account')
+      this.myWorld = await this.$axios.$get(
+        `/gw2-api/worlds?id=${this.myAccount.world}&lang=fr`
+      )
+    }
   },
   fetchKey: 'account-header',
   methods: {
@@ -83,7 +97,11 @@ export default {
       })
     },
     forceRerender(child) {
-      this.$emit('forceRerender');
+      this.$emit('forceRerender')
+    },
+    disconnect() {
+      this.$store.commit('saveToken')
+      this.$router.push('/apiKey')
     },
   },
 }
@@ -102,7 +120,6 @@ export default {
   border-color: rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 }
 
 .header-title .btn {
@@ -111,11 +128,14 @@ export default {
   border: none;
 }
 
+.header-title .reload {
+  margin-left: auto;
+}
+
 .header-content {
   padding-top: 1em;
   padding-left: 1em;
   background-color: #bd0f0f;
   color: white;
 }
-
 </style>

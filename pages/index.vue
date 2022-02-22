@@ -1,7 +1,12 @@
 <template>
   <div class="home">
     <div class="header">
-      <account-header :key="`header-${componentKey}`" title="Account Summary" @forceRerender="forceRerender"/>
+      <account-header
+        :key="`header-${componentKey}`"
+        title="Account Summary"
+        :connected="true"
+        @forceRerender="forceRerender"
+      />
     </div>
     <div class="body">
       <b-row>

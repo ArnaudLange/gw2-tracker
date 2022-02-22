@@ -1,10 +1,10 @@
 <template>
   <div class="apiKey">
-    <div class="header-title">
-      <h1>
-        <img src="~/static/gw2_white_logo.png" height="50" />
-        Account Tracker
-      </h1>
+    <div class="header">
+      <account-header
+        title="Account Tracker - Log In"
+        :connected="false"
+      />
     </div>
     <div class="body">
       <div class="form-container">
@@ -69,21 +69,6 @@ export default {
 
 .apiKey {
   font-family: 'Roboto';
-}
-
-.header-title {
-  padding-top: 0.5em;
-  padding-left: 0.5em;
-  padding-bottom: 0.1em;
-  padding-right: 0.5em;
-  background-color: #bd0f0f;
-  color: white;
-  border-width: 2px;
-  border-style: solid;
-  border-color: rgba(0, 0, 0, 0.04);
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 }
 
 .body {

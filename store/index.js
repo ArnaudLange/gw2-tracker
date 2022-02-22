@@ -5,9 +5,9 @@ export const state = () => ({
 export const mutations = {
   saveToken(state, newToken) {
     if (newToken) {
-      state.token = newToken;
+      state.token = newToken
     } else {
-      state.token = "";
+      state.token = ''
     }
   },
 }

@@ -1,10 +1,7 @@
 <template>
   <div class="apiKey">
     <div class="header">
-      <account-header
-        title="Account Tracker - Log In"
-        :connected="false"
-      />
+      <account-header title="Account Tracker - Log In" :connected="false" />
     </div>
     <div class="body">
       <div class="form-container">

@@ -6,8 +6,17 @@
     <div class="custom-card-content">
       <p v-for="currency in wallet" :key="currency.id">
         <span :id="`currency-${currency.id}`">
-          <img :src="currency.icon" height="20" /> {{ currency.name }} :
-          {{ currency.value }}
+          <img class="icon" :src="currency.icon" height="20" />
+          {{ currency.name }} :
+          <span v-if="currency.id !== 1"> {{ currency.value }}</span>
+          <span v-else>
+            {{ Math.floor(currency.value / 10000) }}
+            <img class="money" src="~/static/gold.png" />
+            {{ Math.floor((currency.value % 10000) / 100) }}
+            <img class="money" src="~/static/silver.png" />
+            {{ currency.value % 100 }}
+            <img class="money" src="~/static/copper.png" />
+          </span>
         </span>
         <b-tooltip
           :title="currency.description"
@@ -47,8 +56,12 @@ export default {
 </script>
 
 <style scoped>
-img {
+.icon {
   vertical-align: text-bottom;
+}
+
+.money {
+  vertical-align: middle;
 }
 
 p {

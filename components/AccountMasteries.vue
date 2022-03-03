@@ -15,26 +15,7 @@
           :title="region.region"
         >
           {{ region.available }}
-          <img
-            v-if="region.region === 'Maguuma'"
-            src="~/static/mp_hot.png"
-            height="20"
-          />
-          <img
-            v-if="region.region === 'Tyria'"
-            src="~/static/mp_tyria.png"
-            height="20"
-          />
-          <img
-            v-if="region.region === 'Desert'"
-            src="~/static/mp_pof.png"
-            height="20"
-          />
-          <img
-            v-if="region.region === 'Tundra'"
-            src="~/static/mp_is.png"
-            height="20"
-          />
+          <mastery-icon :region="region.region" />
         </span>
       </div>
     </div>
@@ -47,7 +28,7 @@
           style="vertical-align: middle"
         >
           <span
-            ><img src="~/static/mp.png" height="20" /> {{ mastery.name }}</span
+            ><mastery-icon :region="mastery.region" /> {{ mastery.name }}</span
           >
           <span class="when-opened">
             <span class="bi bi-chevron-down" />
@@ -81,26 +62,7 @@
               ></span>
               <span v-else>
                 : {{ level.point_cost }}
-                <img
-                  v-if="mastery.region === 'Maguuma'"
-                  src="~/static/mp_hot.png"
-                  height="20"
-                />
-                <img
-                  v-if="mastery.region === 'Tyria'"
-                  src="~/static/mp_tyria.png"
-                  height="20"
-                />
-                <img
-                  v-if="mastery.region === 'Desert'"
-                  src="~/static/mp_pof.png"
-                  height="20"
-                />
-                <img
-                  v-if="mastery.region === 'Tundra'"
-                  src="~/static/mp_is.png"
-                  height="20"
-                />
+                <mastery-icon :region="mastery.region" />
               </span>
             </span>
             <b-tooltip
@@ -118,8 +80,10 @@
 </template>
 
 <script>
+import masteryIcon from './masteryIcon.vue'
 export default {
   name: 'AccountMasteries',
+  components: { masteryIcon },
   data() {
     return {
       masteries: [],

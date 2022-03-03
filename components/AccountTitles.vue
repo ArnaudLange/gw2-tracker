@@ -45,9 +45,8 @@ export default {
     )
 
     this.titlesToDisplay = this.myTitles.map((title) => {
-      const foundAchievement = this.achievementList.find(
-        (el) => el.id === title.achievement
-      )
+      const foundAchievement =
+        this.achievementList.find((el) => el.id === title.achievement) || {}
       return {
         ...title,
         achievement: foundAchievement.requirement

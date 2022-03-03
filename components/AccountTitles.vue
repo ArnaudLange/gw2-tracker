@@ -25,23 +25,18 @@ export default {
   name: 'AccountTitles',
   data() {
     return {
-      titles: [],
       myTitles: [],
       titlesToDisplay: [],
       achievementList: [],
     }
   },
   async fetch() {
-    const titlePromises = await Promise.all([
+    const [titles, myTitlesIds] = await Promise.all([
       this.$axios.$get('/gw2-api/titles?ids=all&lang=fr'),
-      this.$axios.$get('/gw2-api/account/titles')
+      this.$axios.$get('/gw2-api/account/titles'),
     ])
-    this.titles = titlePromises[0]
-    const myTitlesIds = titlePromises[1]
 
-    this.myTitles = this.titles.filter((title) =>
-      myTitlesIds.includes(title.id)
-    )
+    this.myTitles = titles.filter((title) => myTitlesIds.includes(title.id))
 
     const achievementIds = this.myTitles.map((el) => el.achievement)
     this.achievementList = await this.$axios.$get(

@@ -86,33 +86,27 @@ export default {
   components: { masteryIcon },
   data() {
     return {
-      masteries: [],
-      myMasteries: [],
-      myMasteryPoints: [],
       masteriesToDisplay: [],
       lightMasteryPoints: [],
       masteryRank: undefined,
     }
   },
   async fetch() {
-    const masteriesPromises = await Promise.all([
+    const [masteries, myMasteries, myMasteryPoints] = await Promise.all([
       this.$axios.$get('/gw2-api/masteries?ids=all&lang=fr'),
       this.$axios.$get('/gw2-api/account/masteries'),
       this.$axios.$get('/gw2-api/account/mastery/points'),
     ])
-    this.masteries = masteriesPromises[0]
-    this.myMasteries = masteriesPromises[1]
-    this.myMasteryPoints = masteriesPromises[2]
 
-    this.masteriesToDisplay = this.masteries.map((mastery) => {
-      const foundMas = this.myMasteries.find((el) => el.id === mastery.id)
+    this.masteriesToDisplay = masteries.map((mastery) => {
+      const foundMas = myMasteries.find((el) => el.id === mastery.id)
       return { ...mastery, level: foundMas ? foundMas.level : 0 }
     })
-    this.lightMasteryPoints = this.myMasteryPoints.totals.map((el) => ({
+    this.lightMasteryPoints = myMasteryPoints.totals.map((el) => ({
       region: el.region,
       available: el.earned - el.spent,
     }))
-    this.masteryRank = this.myMasteryPoints.totals.reduce(
+    this.masteryRank = myMasteryPoints.totals.reduce(
       (acc, cur) => acc + cur.spent,
       0
     )

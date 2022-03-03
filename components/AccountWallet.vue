@@ -35,22 +35,17 @@ export default {
   name: 'AccountWallet',
   data() {
     return {
-      currencies: [],
-      myCurrencies: [],
       wallet: [],
     }
   },
   async fetch() {
-    const walletPromises = await Promise.all([
+    const [currencies, myCurrencies] = await Promise.all([
       this.$axios.$get('/gw2-api/currencies?ids=all&lang=fr'),
       this.$axios.$get('/gw2-api/account/wallet'),
     ])
 
-    this.currencies = walletPromises[0]
-    this.myCurrencies = walletPromises[1]
-
-    this.wallet = this.currencies.map((currency) => {
-      const foundCur = this.myCurrencies.find((el) => el.id === currency.id)
+    this.wallet = currencies.map((currency) => {
+      const foundCur = myCurrencies.find((el) => el.id === currency.id)
       return { ...currency, value: foundCur ? foundCur.value : 0 }
     })
   },

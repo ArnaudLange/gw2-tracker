@@ -32,9 +32,13 @@ export default {
     }
   },
   async fetch() {
-    this.titles = await this.$axios.$get('/gw2-api/titles?ids=all&lang=fr')
+    const titlePromises = await Promise.all([
+      this.$axios.$get('/gw2-api/titles?ids=all&lang=fr'),
+      this.$axios.$get('/gw2-api/account/titles')
+    ])
+    this.titles = titlePromises[0]
+    const myTitlesIds = titlePromises[1]
 
-    const myTitlesIds = await this.$axios.$get('/gw2-api/account/titles')
     this.myTitles = this.titles.filter((title) =>
       myTitlesIds.includes(title.id)
     )

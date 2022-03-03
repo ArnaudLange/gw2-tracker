@@ -95,16 +95,14 @@ export default {
     }
   },
   async fetch() {
-    this.masteries = await this.$axios.$get(
-      '/gw2-api/masteries?ids=all&lang=fr'
-    )
-    this.myMasteries = await this.$axios.$get('/gw2-api/account/masteries')
-    this.myMasteryPoints = await this.$axios.$get(
-      '/gw2-api/account/mastery/points'
-    )
-
-    this.titles = await this.$axios.$get('/gw2-api/titles?ids=all&lang=fr')
-    this.myTitles = await this.$axios.$get('/gw2-api/account/titles')
+    const masteriesPromises = await Promise.all([
+      this.$axios.$get('/gw2-api/masteries?ids=all&lang=fr'),
+      this.$axios.$get('/gw2-api/account/masteries'),
+      this.$axios.$get('/gw2-api/account/mastery/points'),
+    ])
+    this.masteries = masteriesPromises[0]
+    this.myMasteries = masteriesPromises[1]
+    this.myMasteryPoints = masteriesPromises[2]
 
     this.masteriesToDisplay = this.masteries.map((mastery) => {
       const foundMas = this.myMasteries.find((el) => el.id === mastery.id)

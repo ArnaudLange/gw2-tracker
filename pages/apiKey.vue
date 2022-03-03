@@ -27,6 +27,7 @@ import swal from 'sweetalert2'
 
 export default {
   name: 'ApiKey',
+  middleware: 'alreadyAuthenticated',
   data() {
     return {
       form: {
